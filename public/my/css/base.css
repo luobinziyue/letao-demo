@@ -115,3 +115,11 @@ img{
 	display:block;
 	margin-bottom:10px;
 }
+.mui-clearfix::before {
+	content: "";
+	display: block;
+	height: 0;
+	line-height: 0;
+	clear: both;
+	visibility: hidden;
+}

@@ -1,0 +1,92 @@
+body {
+  height: 7000px;
+}
+.shoes {
+  padding: 10px;
+  width: 100%;
+}
+.shoes a {
+  display: block;
+  width: 33.33%;
+  float: left;
+}
+.shoes a img {
+  width: 100%;
+  display: block;
+}
+.brand {
+  width: 100%;
+}
+.brand > .brand-tip {
+  width: 100%;
+}
+.brand > .brand-tip img {
+  width: 100%;
+}
+.brand > .brand-bottom li {
+  width: 25%;
+  float: left;
+}
+.brand > .brand-bottom li img {
+  width: 100%;
+  display: block;
+}
+.product {
+  width: 100%;
+}
+.product .product-tip {
+  width: 100%;
+}
+.product .product-tip img {
+  width: 100%;
+}
+.product ul {
+  width: 100%;
+}
+.product ul li {
+  width: 50%;
+  float: left;
+  padding: 5px;
+}
+.product ul li a {
+  width: 100%;
+  display: block;
+  padding: 5px;
+  box-shadow: 0 0 10px #ccc;
+}
+.product ul li a img {
+  width: 100%;
+  display: block;
+}
+.product ul li a .name {
+  display: block;
+  height: 38px;
+  line-height: 18px;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+  color: #8f8f94;
+}
+.product ul li a p {
+  text-align: center;
+  padding-top: 5px;
+}
+.product ul li a p span:first-child {
+  color: red;
+  padding-right: 2px;
+}
+.product ul li a p span:last-child {
+  text-decoration: line-through;
+  padding-left: 2px;
+}
+.product ul li a .buy-now {
+  display: block;
+  background-color: #006699;
+  color: #fff;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 4px;
+  margin: 0 auto 5px;
+  text-align: center;
+}

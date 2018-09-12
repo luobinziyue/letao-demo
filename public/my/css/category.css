@@ -1,0 +1,25 @@
+body {
+  height: 100%;
+}
+body .my-header {
+  background-color: #006699;
+}
+body .my-header a {
+  color: #ffffff;
+}
+body .my-header h1 {
+  color: #ffffff;
+}
+body .content {
+  width: 100%;
+  height: 100%;
+}
+body .content .con-left {
+  width: 90px;
+  float: left;
+  background-color: pink;
+}
+body .content .con-right {
+  margin-left: 100px;
+  background-color: skyblue;
+}
