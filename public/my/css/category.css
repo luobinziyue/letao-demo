@@ -2,15 +2,6 @@ html,
 body {
   height: 100%;
 }
-.my-header {
-  background-color: #006699;
-}
-.my-header a {
-  color: #ffffff;
-}
-.my-header h1 {
-  color: #ffffff;
-}
 .content {
   width: 100%;
   position: absolute;
