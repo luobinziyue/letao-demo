@@ -13,7 +13,7 @@ a{
 	padding:0;
 }
 
-ul{
+ul,li{
 	list-style:none;
 }
 
@@ -114,4 +114,12 @@ img{
 	border:none;
 	display:block;
 	margin-bottom:10px;
+}
+.mui-clearfix::before {
+	content: "";
+	display: block;
+	height: 0;
+	line-height: 0;
+	clear: both;
+	visibility: hidden;
 }
