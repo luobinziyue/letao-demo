@@ -33,45 +33,48 @@
 .container h5 span {
   font-size: 14px;
 }
-.search-result {
-  padding-top: 44px;
+#refCont {
+  position: absolute;
+  top: 44px;
+  bottom: 50px;
+  width: 100%;
 }
-.search-result .filter {
+#refCont .filter {
   margin: 10px auto 0;
-  width: 96%;
+  width: 92%;
 }
-.search-result .filter .mui-col-xs-6 {
+#refCont .filter .mui-col-xs-6 {
   height: 35px;
   line-height: 35px;
   font-size: 14px;
   text-align: center;
   background-color: #efeff4;
 }
-.search-result .filter .mui-col-xs-6 span {
+#refCont .filter .mui-col-xs-6 span {
   font-size: 14px;
 }
-.search-result .product {
+#refCont .product {
   width: 100%;
 }
-.search-result .product ul {
+#refCont .product ul {
   width: 100%;
 }
-.search-result .product ul li {
+#refCont .product ul li {
   width: 50%;
   float: left;
   padding: 5px;
 }
-.search-result .product ul li a {
+#refCont .product ul li a {
   width: 100%;
   display: block;
   padding: 5px;
   box-shadow: 0 0 10px #ccc;
 }
-.search-result .product ul li a img {
+#refCont .product ul li a img {
   width: 100%;
   display: block;
 }
-.search-result .product ul li a .name {
+#refCont .product ul li a .name {
   display: block;
   height: 38px;
   line-height: 18px;
@@ -81,19 +84,19 @@
   color: #8f8f94;
   overflow: hidden;
 }
-.search-result .product ul li a p {
+#refCont .product ul li a p {
   text-align: center;
   padding-top: 5px;
 }
-.search-result .product ul li a p span:first-child {
+#refCont .product ul li a p span:first-child {
   color: red;
   padding-right: 2px;
 }
-.search-result .product ul li a p span:last-child {
+#refCont .product ul li a p span:last-child {
   text-decoration: line-through;
   padding-left: 2px;
 }
-.search-result .product ul li a .buy-now {
+#refCont .product ul li a .buy-now {
   display: block;
   background-color: #006699;
   color: #fff;

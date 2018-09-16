@@ -1,12 +1,12 @@
-.container{
-  padding:10px;
+.container {
+  padding: 10px;
   .search {
     width: 100%;
     height: 30px;
     border: 1px solid #006699;
     margin-bottom: 20px;
     position: relative;
-    >input:first-child {
+    > input:first-child {
       height: 28px;
       line-height: 28px;
       font-size: 14px;
@@ -14,7 +14,7 @@
       border: none;
       padding: 0 70px 0 10px;
     }
-    >input:last-child {
+    > input:last-child {
       width: 60px;
       height: 30px;
       position: absolute;
@@ -36,11 +36,17 @@
   }
 }
 
-.search-result {
-  padding-top: 44px;
+//搜索结果页面的样式
+#refCont {
+  //这里需要position才能滑动
+  position: absolute;
+  top: 44px;
+  bottom: 50px;
+  width: 100%;
+
   .filter {
     margin: 10px auto 0;
-    width: 96%;
+    width: 92%;
     .mui-col-xs-6 {
       height: 35px;
       line-height: 35px;
@@ -50,7 +56,6 @@
       span {
         font-size: 14px;
       }
-
 
     }
   }
@@ -109,5 +114,6 @@
       }
     }
   }
+
 }
 

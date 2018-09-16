@@ -15,16 +15,18 @@
     <script src="assets/mui/js/mui.min.js"></script>
     <script src="assets/artTemplate/template-web.js"></script>
     <script src="js/demo-result.js"></script>
+    <script src="js/demo-public.js"></script>
+
 </head>
 <body>
 <header class="mui-bar mui-bar-nav my-header">
     <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 
     <h1 class="mui-title">搜索结果</h1>
-    <a class="mui-icon mui-icon-search mui-pull-right"></a>
+    <a href="demo-search.html" class="mui-icon mui-icon-search mui-pull-right"></a>
 </header>
 <nav class="mui-bar mui-bar-tab footer">
-    <a class="mui-tab-item mui-active" href="index.html">
+    <a class="mui-tab-item mui-active" href="demo.html">
         <span class="mui-icon mui-icon-home"></span>
         <span class="mui-tab-label">首页</span>
     </a>
@@ -42,31 +44,35 @@
     </a>
 </nav>
 <!--内容部分-->
-<div class="search-result">
-    <!--使用mui栅格组件-->
-    <div class="mui-content">
-        <div class="mui-row filter">
-            <div class="mui-col-xs-6">
-                <li>
-                    价格
+<div class="search-result" id="refCont">
+    <!--用盒子包裹住下面的内容，这样加载的菊花图就会在最下面转圈圈-->
+    <div >
+        <!--使用mui栅格组件-->
+        <div class="mui-content" >
+            <div class="mui-row filter">
+                <div class="mui-col-xs-6">
+                    <li class="price">
+                        价格
                     <span class="mui-icon mui-icon-arrowdown">
                     </span>
-                </li>
-            </div>
-            <div class="mui-col-xs-6">
-                <li>
-                    销量
+                    </li>
+                </div>
+                <div class="mui-col-xs-6">
+                    <li>
+                        销量
                     <span class="mui-icon mui-icon-arrowdown">
                     </span>
-                </li>
+                    </li>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="product">
-        <ul class="mui-clearfix result">
+        <div class="product">
+            <ul class="mui-clearfix result">
 
-        </ul>
+            </ul>
+        </div>
     </div>
+
 </div>
 
 <script type="text/html" id="productTem">
@@ -84,7 +90,6 @@
         </li>
 
     {{/each}}
-
 
 </script>
 
