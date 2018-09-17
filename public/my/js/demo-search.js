@@ -28,7 +28,7 @@ $(function() {
     }
 
     //清空历史记录，给清空历史添加点击事件
-    $('.clear').on('click',function() {
+    $('.clear').on('tap',function() {
         $('.history').html('');
         localStorage.removeItem('keywords');
         keyArr.length = 0;

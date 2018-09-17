@@ -34,20 +34,6 @@ $(function () {
     })
 })
 
-function getParamsByUrl(url, name) {
-    //截取问号之后的字符串
-    var params = url.substr(url.indexOf("?") + 1);
-    var param = params.split('&');
-
-    for (var i = 0; i < param.length; i++) {
-        var current = param[i].split('=');
-        //console.log(current);
-        if (current[0] == name) {
-            return current[1];
-        }
-    }
-    return null;
-}
 //ajax请求
 function getMore() {
     //这个操作的意义是that为空时，就会这个判断，以后this指针都会指向mui的d对象，然后赋值给that，that的值不会再变动

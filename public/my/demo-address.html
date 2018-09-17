@@ -54,9 +54,9 @@
 <!--页面内容-->
 <div class="container">
     <div class="mui-table-view-cell">
-        <a href="demo-addAddress.html" class=" mui-text-center ">添加收货地址</a>
+        <a href="demo-addAddress.html?isEdit=0" class=" mui-text-center ">添加收货地址</a>
     </div>
-    <ul class="mui-table-view " id="queryAddress">
+    <ul class="mui-table-view queryAddress" id="editAddress" >
 
     </ul>
 
@@ -65,9 +65,14 @@
 <script type="text/template" id="addressTpl">
 {{each result value index}}
     <li class="mui-table-view-cell mui-media">
-        <a href="javascript:;">
+        <!--可以滑动的删除按钮-->
+        <div class="mui-slider-right mui-disabled">
+            <span href="javascript:void(0); "class="mui-btn mui-btn-blue edit" data-id="{{value.id}}">编辑</span>
+            <a href="javascript:void(0); " class="mui-btn mui-btn-red del" data-id="{{value.id}}">删除</a>
+        </div>
+        <a href="javascript:;" class="mui-slider-handle ">
             <div class="mui-media-body">
-                收货人：{{value.recipients}} 邮编：{{value.mobile}}
+                收货人：{{value.recipients}} 邮编：{{value.postCode}}
                 <p class='mui-ellipsis'>{{value.address}}{{value.addressDetail}}</p>
             </div>
         </a>

@@ -20,7 +20,7 @@ $(function() {
     })
 
     //��������ӿ�
-    $('.item').on("click","a",function() {
+    $('.item').on("tap","a",function() {
         var id = $(this).data("id");
         $(".item").find('a').removeClass('active');
         $(this).addClass('active');
