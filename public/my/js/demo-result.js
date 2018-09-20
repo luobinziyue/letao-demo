@@ -1,12 +1,15 @@
 
-var key = getParamsByUrl(location.href, "keyword");
+
 //注意作用域
 var html = "";
 var page = 1;
 var priceSort =1;
 var that = "";
+var key;
 //加载页面时mui会自动上拉加载一次，发生在price点击事件之前
 $(function () {
+
+    key = getParamsByUrl(location.href, "keyword");
 
     mui.init({
         pullRefresh: {
@@ -41,7 +44,7 @@ function getMore() {
         that = this;
     }
 
-    console.log(that);  //指向的是mui d对象
+    //console.log(that);  //指向的是mui d对象
 
     $.ajax({
         type: 'get',
@@ -55,7 +58,7 @@ function getMore() {
         dataType: 'json',
         success: function (res) {
             //console.log(this); 指向的是window对象
-            //console.log(res);
+            console.log(res);
             if(res.data.length > 0) {
                 html += template('productTem', {content: res.data});
 

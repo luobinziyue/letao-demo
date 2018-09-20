@@ -8,12 +8,13 @@
 	<link rel="stylesheet" href="css/system.css">
 	<script src="assets/jquery/jquery.min.js"></script>
 	<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/artTemplate/template-native.js"></script>
+	<script src="assets/artTemplate/template-web.js"></script>
 	<script src="js/common.js"></script>
 	<script src="js/user.js"></script>
 </head>
 <body>
 	<div class="system">
+		<!--侧边栏-->
 		<div class="aside">
 			<div class="profile">
 				<div class="avatar img-circle">
@@ -54,6 +55,7 @@
 			</div>
 		</div>
 		<div class="main">
+			<!--头部-->
 			<div class="header">
 	            <nav class="navbar navbar-custom">
 	                <div class="navbar-header">
@@ -63,42 +65,49 @@
 	                </div>
 	                <ul class="nav navbar-nav navbar-right">
 	                    <li>
-	                        <a href="javascript:;" class="login_out_bot" id="loginOut">
+	                        <a href="javascript:;" class="logout" id="loginOut">
 	                            <i class="fa fa-sign-out"></i> 退出
 	                        </a>
 	                    </li>
 	                </ul>
 	            </nav>
 	        </div>
+			<!--中心内容-->
 	        <div class="body">
 	        	<table class="table table-bordered" id="userBox">
-	        		
+					<thead>
+					<tr>
+						<th>用户名</th>
+						<th>电话</th>
+						<th>状态</th>
+						<th>操作</th>
+					</tr>
+					</thead>
+					<tbody>
+
+					</tbody>
 	        	</table>
 	        </div>
 		</div>
 	</div>
-	<script id="userTpl" type="text/html">
+	<script type="text/html" id="userInfo">
+	{{each info value index}}
 		<tr>
-			<th>用户名</th>
-			<th>电话</th>
-			<th>状态</th>
-			<th>操作</th>
+			<td>{{value.username}}</td>
+			<td>{{value.mobile}}</td>
+			<td>
+				{{value.isDelete?"已启用":"已禁用"}}
+			</td>
+			<td>
+
+				<button type="button"
+						class="btn editKey {{value.isDelete?'btn-danger':'btn-success'}}"
+						data-use = "{{value.isDelete}}" data-id="{{value.id}}">
+					{{value.isDelete?"禁用":"启用"}}
+				</button>
+			</td>
 		</tr>
-		<% for(var i=0;i<data.rows.length;i++){ %>
-			<tr>
-				<td><%=data.rows[i].username %></td>
-				<td><%=data.rows[i].mobile %></td>
-				<td>已启用</td>
-				<td>
-					<button 
-					data-id="<%=data.rows[i].id%>"
-					data-isDelete="<%=data.rows[i].isDelete %>"
-					type="button"
-					id="deleteBtn"
-					class="btn <%=data.rows[i].isDelete ? 'btn-danger' : 'btn-success' %>"><%=data.rows[i].isDelete ? '禁用' : '启用' %></button>
-				</td>
-			</tr>
-		<% } %>
-	</script>
+	{{/each}}
+</script>
 </body>
 </html>

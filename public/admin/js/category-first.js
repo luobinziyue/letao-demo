@@ -1,115 +1,81 @@
-$(function(){
-
-	var page = 1;
-	var pagesize = 10;
-	var totalPage = 0;
-
-	GetCategory();
-
-	$('#prevBtn').on('click',function(){
-
-		page--;
-
-		if(page < 1){
-
-			page = 1;
-
-			alert('已经到了第一页');
-
-			return;
-		}
-
-		GetCategory();
-
-	});
-
-	$('#nextBtn').on('click',function(){
-
-		page++;
-		
-		if(page > totalPage){
-
-			page = totalPage;
-
-			alert('已经到了最后一页');
-
-			return;
-
-		}
-
-		GetCategory()
-
-	});
+$(function() {
+    var page = 1;
+    var pageSize = 6;
+    var pageMax;
+    //页面加载获取分类信息
+    getPageInfo();
 
 
-	function GetCategory(){
+    //点击下一页跳转到下一页
+    $('#nextBtn').on("click",function() {
+        if(page >= pageMax) {
+            page = pageMax;
+            alert('已经是最后一页了');
+            return ;
+        }
+        ++page;
+        getPageInfo();
 
-		$.ajax({
-			url:'/category/queryTopCategoryPaging',
-			type:'get',
-			data:{
-				page:page,
-				pageSize:pagesize
-			},
-			success:function(result){
+    })
 
-				totalPage = Math.ceil(result.total/pagesize);
+    //点击上一页跳转到上一页
+    $('#prevBtn').on('click',function() {
+        if(page <= 1) {
+            page = 1;
+            alert('已经是第一页了');
+            return ;
+        }
+        page--;
+        getPageInfo();
+    })
+    //封装ajax
+    function getPageInfo(){
+        $.ajax({
+            type:'get',
+            url:"/category/queryTopCategoryPaging",
+            data:{
+                page:page,
+                pageSize:pageSize,
+            },
+            dataType:'json',
+            success:function(res){
+                console.log(res);
+                var html = template('categoryTpl',{cont:res.rows});
+                $('#categoryBox').html(html);
+                pageMax = Math.ceil(res.total / pageSize);
+                console.log(pageMax);
 
-				$('#categoryBox').html(template('categoryTpl',{data:result}));
-
-			}
-		});
-
-	}
+            }
+        })
+    }
 
 
+    //添加一级分类按钮
+    $('#addCategory').on('click',function() {
+        var cont = $('#categoryName').val().trim();
+        //console.log(cont);
+        if(!cont){
+            alert("请输入正确的内容");
+            return;
+        }
+        $.ajax({
+            type:'post',
+            url:"/category/addTopCategory",
+            data:{
+                categoryName:cont,
+            },
+            dataType:'json',
+            success:function(res){
+                //console.log(res);
+                if(res.success) {
+                    location.reload();
+                }
+            }
+        })
 
-
-	$('#addCategory').on('click',function(){
-
-		var categoryName = $('#categoryName').val();
-
-		if(!categoryName){
-
-			alert('请输入分类名称');
-
-			return;
-
-		}
-
-		$.ajax({
-			type:'post',
-			url:'/category/addTopCategory',
-			data:{
-				categoryName:categoryName
-			},
-			success:function(result){
-
-				if(result.success){
-
-					$('#modal').modal('hide');
-
-					location.reload();
-
-				}
-
-			}
-		})
-
-	});
+    })
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-});
-
+})

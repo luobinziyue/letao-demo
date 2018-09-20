@@ -19,7 +19,7 @@ $(function() {
         }
     })
 
-    //��������ӿ�
+    //点击左侧栏一级列表里的分类栏，右边二级列表反馈内容
     $('.item').on("tap","a",function() {
         var id = $(this).data("id");
         $(".item").find('a').removeClass('active');

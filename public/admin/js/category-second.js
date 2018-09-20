@@ -1,163 +1,104 @@
-$(function(){
+$(function() {
+    var page = 1;
+    var pageSize = 6;
+    var pageMax;
+    var preview;
+    //页面加载获取分类信息
+    getPageInfo();
+
+    //点击下一页跳转到下一页
+    $('#nextBtn').on("click",function() {
+        if(page >= pageMax) {
+            page = pageMax;
+            alert('已经是最后一页了');
+            return ;
+        }
+        ++page;
+        getPageInfo();
+
+    })
+    //点击上一页跳转到上一页
+    $('#prevBtn').on("click",function() {
+        if(page <= 1) {
+            page = pageMax;
+            alert('已经是第一页了');
+            return ;
+        }
+        page--;
+        getPageInfo();
+
+    })
+
+    function getPageInfo() {
+        $.ajax({
+            type:'get',
+            url:"/category/querySecondCategoryPaging",
+            data:{
+                page:page,
+                pageSize:pageSize,
+            },
+            success:function(res) {
+                console.log(res);
+                var html = template('categoryTpl',{cont:res.rows});
+                $('#categoryBox').html(html);
+                pageMax = Math.ceil(res.total / pageSize);
+
+            }
+        })
+    }
+
+    //调取一级分类接口获取数据
+    $.ajax({
+        type:'get',
+        url:'/category/queryTopCategoryPaging',
+        data:{
+            page:1,
+            pageSize:100,
+        },
+        success:function(res) {
+            console.log(res);
+            var html = template('optionTpl',{sel:res.rows});
+            $('.categoryId').html(html);
+        }
+    })
+
+    //点击上传文件按钮
+    $('#fileUpload').fileupload({
+        dataType:'json',
+        //类似ajax的success
+        done:function(e,data) {
+            //console.log(data);
+            //上传文件预览
+            $('#showBrand').attr('src',data.result.picAddr);
+            //链接地址
+            preview = data.result.picAddr;
+        }
+    })
+
+    //点击保存按钮
+    $('#addCategory').on('click',function() {
+        var selected = $('select').val();
+        var brandName = $('#brandName').val().trim();
+        var brandLogo = $('[name = "file"]').val().trim();
+        //console.log(select);
+        $.ajax({
+            type:'post',
+            url:"/category/addSecondCategory",
+            data:{
+                brandName:brandName,
+                categoryId:selected,
+                brandLogo:preview,
+                hot:0,
+            },
+            dataType:'json',
+            success:function(res) {
+                console.log(res);
+                if(res.success) {
+                    location.reload();
+                }
+            }
+        })
+
+    })
 
-	var page = 1;
-	var pageSize = 10;
-	var totalPage = 0;
-
-	GetCategory();
-
-	function GetCategory(){
-
-		$.ajax({
-			type:'get',
-			url:'/category/querySecondCategoryPaging',
-			data:{
-				page:page,
-				pageSize:pageSize
-			},
-			success:function(result){
-
-				console.log(result)
-
-				totalPage = Math.ceil(result.total/pageSize);
-
-				$('#categoryBox').html(template('categoryTpl',{data:result}))
-
-			}
-		});
-
-	}
-
-	$('#prevBtn').on('click',function(){
-
-		page--;
-
-		if(page < 1){
-
-			page = 1;
-
-			alert('已经是第一页了');
-
-			return;
-
-		}
-
-		GetCategory()
-
-	});
-
-	$('#nextBtn').on('click',function(){
-
-		page++;
-
-		if(page > totalPage){
-
-			page = totalPage;
-
-			alert('已经是最后一页了');
-
-			return;
-
-		}
-
-		GetCategory()
-
-	});
-
-	
-
-
-
-	$('#fileUpload').fileupload({
-	    dataType: 'json',
-	    done: function (e, data) {
-	    	brandData.brandLogo = data._response.result.picAddr;
-	        var imgUrl= data._response.result.picAddr;
-	        $("#showBrand").attr("src",imgUrl);
-	    }
-	});
-
-
-	// 获取一级分类
-	$.ajax({
-		url:'/category/queryTopCategoryPaging',
-		type:'get',
-		data:{
-			page:1,
-			pageSize:100
-		},
-		success:function(result){
-			$('#firstCategory').html(template('firstCategoryTpl',{data:result.rows}));
-		}
-	});
-
-
-
-	var brandData = {
-		brandName:"",
-		categoryId:"",
-		brandLogo:"",
-		hot:0
-	}
-
-	$('#addCategory').on('click',function(){
-
-		brandData.brandName = $('#brandName').val();
-		brandData.categoryId = $('#categoryId').val();
-
-		if(brandData.categoryId == '-1'){
-
-			alert('请输入品牌所属分类');
-
-			return;
-
-		}
-
-		if(!brandData.brandName){
-
-			alert('请输入品牌名称')
-
-			return;
-
-		}
-
-		if(!brandData.brandLogo){
-
-			console.log(brandData.brandLogo)
-
-			alert('请输入上传品牌图片');
-
-			return;
-
-		}
-
-		$.ajax({
-			url:'/category/addSecondCategory',
-			type:'post',
-			data:brandData,
-			success:function(result){
-
-				if(result.success){
-
-					location.reload();
-
-				}else{
-
-					alert('品牌添加失败');
-
-					console.log(result);
-
-				}
-
-			}
-		})
-
-		
-
-	});
-
-
-
-
-
-});
+})

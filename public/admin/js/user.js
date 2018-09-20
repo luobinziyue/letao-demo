@@ -1,56 +1,40 @@
-$(function(){
+$(function () {
+    $.ajax({
+        type:'get',
+        url:'/user/queryUser',
+        data:{
+            page:1,
+            pageSize:10
+        },
+        dataType:'json',
+        success:function(res) {
+            //console.log(res);
+            var html = template("userInfo",{info:res.rows});
+            //console.log(html);
+            $('tbody').html(html);
 
-	$.ajax({
-		url:'/user/queryUser',
-		type:'get',
-		data:{
-			page:1,
-			pageSize:10
-		},
-		success:function(result){
+        }
+    })
 
-			console.log(result)
+    $('tbody').on('click','.editKey',function() {
+        //console.log(this);
+        var id = $(this).data('id');
+        var isDelete = Number($(this).data('use'));
+        console.log(id,isDelete);
+        $.ajax({
+            type:'post',
+            url:"/user/updateUser",
+            data:{
+                id:id,
+                isDelete:isDelete?0:1,
+            },
+            success:function(result) {
+                //console.log(res);
+                if(result.success) {
+                    location.reload();
+                }
+            }
+        })
+    })
 
-			$('#userBox').html(template('userTpl',{data:result}));
-
-		}
-	});
-
-
-	$('body').on('click','#deleteBtn',function(){
-
-		var id = $(this).attr('data-id');
-		var isDelete = Number($(this).attr('data-isDelete')) ? 0 : 1;
-
-		alert(isDelete)
-
-		$.ajax({
-			url:'/user/updateUser',
-			type:'post',
-			data:{
-				id:id,
-				isDelete:isDelete
-			},
-			success:function(result){
-
-				if(result.success){
-
-					location.reload()
-
-				}else{
-
-					if(result.error){
-
-						alert(result.message);
-
-					}
-
-				}
-
-			}
-		})
-
-	});
-
-
-});
+})
